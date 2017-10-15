@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>美发接口</title>
+	</head>
+	<style>
+		table {  
+  
+	     border-collapse: collapse;  
+	  
+	     font-family: Futura, Arial, sans-serif;  
+	  
+		}  
+		th,td {  
+		  
+		     padding: .65em;  
+		  
+		}  
+		  
+		th {  
+		  
+		   background: #555 nonerepeat scroll 0 0;  
+		  
+		   border: 1px solid #777;  
+		  
+		   color: #fff;  
+		  
+		}  
+		  
+		td {  
+		  
+		     border: 1px solid#777;  
+		  
+		}  
+	</style>
+	<body>
+		<table>
+			<thead>
+			<tr>
+				<td>接口名称</td>
+				<td>访问地址</td>
+				<td>参数</td>
+				<td>提交方法</td>
+				<td>说明</td>
+			</tr>
+			</thead>
+			<tr>
+				<td>获取广告</td>
+				<td>/ad</td>
+				<td>state</td>
+				<td>GET</td>
+				<td>广告状态（0.未使用1.已启用）</td>
+			</tr>
+			<tr>
+				<td>创建意见反馈</td>
+				<td>/feedback</td>
+				<td>user_id|title|content|MultipartFile[] uploadFile</td>
+				<td>POST</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>获取店铺详情</td>
+				<td>/shop/select</td>
+				<td>shop_id</td>
+				<td>GET</td>
+				<td>通过店铺ID获取店铺详情</td>
+			</tr>
+			<tr>
+				<td>获取店铺商品分类</td>
+				<td>/shop/category</td>
+				<td>shop_id</td>
+				<td>GET</td>
+				<td>通过店铺ID获取店铺商品分类</td>
+			</tr>
+			<tr>
+				<td>获取店铺商品</td>
+				<td>/shop/commodity</td>
+				<td>category_id</td>
+				<td>GET</td>
+				<td>通过商品分类ID获取商品</td>
+			</tr>
+			<tr>
+				<td>获取使用说明文档</td>
+				<td>/instruction/td>
+				<td>state</td>
+				<td>GET</td>
+				<td>根据状态查询使用说明(0.未使用1.已使用)</td>
+			</tr>
+			<tr>
+				<td>获取钱包说明文档</td>
+				<td>/walletInstruction</td>
+				<td>state</td>
+				<td>GET</td>
+				<td>根据状态查询钱包说明(0.未使用1.已使用)</td>
+			</tr>
+			<tr>
+				<td>获取用户须知文档</td>
+				<td>/userknow</td>
+				<td>state</td>
+				<td>GET</td>
+				<td>根据状态查询用户须知(0.未使用1.已使用)</td>
+			</tr>
+			<tr>
+				<td>获取注册协议文档</td>
+				<td>/registration</td>
+				<td>state</td>
+				<td>GET</td>
+				<td>根据状态查询注册协议(0.未使用1.已使用)</td>
+			</tr>
+			
+	
+			
+			<tr>
+				<td>登录接口</td>
+				<td>/login</td>
+				<td>phoneNum|Icode</td>
+				<td>POST</td>
+				<td>Icode为验证码，返回值为  1普通用户   2设计师 3注册页面  4验证码错误 5手机号不能为空</td>
+			</tr>
+			
+			<tr>
+				<td>验证码</td>
+				<td>/getIcode</td>
+				<td>phoneNum</td>
+				<td>POST</td>
+				<td>返回值 1为成功   2为失败</td></td>
+			</tr>
+			
+			
+			<tr>
+				<td>注册接口</td>
+				<td>/update</td>
+				<td>String phoneNum,Integer gender,Integer userAge,Integer face,String email</td>
+				<td>POST</td>
+				<td>性别,1男，2女,face 1长脸 2圆脸 3方脸 返回值1为成功 2为注册失败</td>
+			</tr>
+			
+			<tr>
+				<td>首页查询设计师</td>
+				<td>/index/desiger</td>
+				<td></td>
+				<td>GET</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>首页查询设计师作品</td>
+				<td>/index/desigerWork</td>
+				<td></td>
+				<td>GET</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>首页封面推荐作品</td>
+				<td>/index/adverWork</td>
+				<td></td>
+				<td>GET</td>
+				<td></td>
+			</tr>
+			
+			<tr>
+				<td>设计师展示接口</td>
+				<td>/getDesigerConditio|/getDesigerConditioAdd</td>
+				<td>String condition</td>
+				<td>GET</td>
+				<td>烫染、理发、美妆、设计,第一次默认传的是烫染（同时发送两个请求）</td>
+			</tr>
+			
+			<tr>
+				<td>搜索接口</td>
+				<td>/search</td>
+				<td>condition</td>
+				<td>GET</td>
+				<td> 模拟的时候  条件输"三"</td>
+			</tr>
+			
+	
+			
+			<tr>
+				<td>进入设计师主页</td>
+				<td>/goToWorkLists|/goToWork</td>
+				<td>designerId</td>
+				<td>GET</td>
+				<td>designerId设计师Id</td>
+			</tr>
+			
+			
+			<tr>
+				<td>设计师详情介绍接口</td>
+				<td>/getIntroduce</td>
+				<td>designerId</td>
+				<td>GET</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>查看指定作品集的接口</td>
+				<td>/getWorkList</td>
+				<td>worksId</td>
+				<td>GET</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>查看作品的接口</td>
+				<td>/get/desigerwork</td>
+				<td>workId</td>
+				<td>GET</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>设计师认证接口</td>
+				<td>/desigerAuth</td>
+				<td>userId|desiger|List<Goodaspect>  aspects</td>
+				<td>POST</td>
+				<td>desiger封装的设计师对象，aspects擅长的方面</td>
+			</tr>
+			<tr>
+				<td>身份证保存接口</td>
+				<td>/IdCardAuth</td>
+				<td>MultipartFile[] uploadFile,long desigerId</td>
+				<td>GET</td>
+				<td>uploadFile为身份证上传的图片</td>
+			</tr>
+			
+			<tr>
+				<td>设计师端发布作品上传图片</td>
+				<td>//uploadPublishWork</td>
+				<td> MultipartFile[] uploadFile</td>
+				<td>GET</td>
+				<td>返回的是图片的地址 List<String> urlList</td>
+			</tr>
+			<tr>
+				<td>设计师端发布作品接口</td>
+				<td>/publish/desigerwork</td>
+				<td>Designwork work|long[] labelId|List<String> urlList</td>
+				<td>GET</td>
+				<td>long[] labelId发布作品时候的标签，urlList上传图片的地址</td>
+			</tr>
+			<tr>
+				<td>新增作品集的接口</td>
+				<td>/publishWorkList</td>
+				<td>MultipartFile[] uploadFile|long desigerId|String name</td>
+				<td>GET</td>
+				<td>name作品集的名字，uploadFile上传的图片</td>
+			</tr>
+			<tr>
+				<td>基本介绍保存的接口</td>
+				<td>/updateIntroduce</td>
+				<td>DesignerParticular particular</td>
+				<td>GET</td>
+				<td>particular为详情的对象</td>
+			</tr>
+			<tr>
+				<td>基本介绍查看的接口</td>
+				<td>/getIntroduce</td>
+				<td>long designerId</td>
+				<td>GET</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>点击设计师 预约页面</td>
+				<td>/desiger/cart</td>
+				<td>long designerId</td>
+				<td>GET</td>
+				<td>预约时间选择页面固定</td>
+			</tr>
+			
+			<tr>
+				<td>添加到购物车</td>
+				<td>//add/cart</td>
+				<td>DesigerCart  desigerCart, long shopId,long[] serviceId</td>
+				<td>GET</td>
+				<td>参数可选，desigerCart为设计师预约页面的对象，serviceId为店铺预约的服务</td>
+			</tr>
+			
+			
+			<tr>
+				<td>设计师服务价格查看</td>
+				<td>/serviceprice</td>
+				<td>long desigerId</td>
+				<td>GET</td>
+				<td>desigerId为设计师ID</td>
+			</tr>
+			
+			
+			<tr>
+				<td>设计师服务价格修改</td>
+				<td>/updateprice</td>
+				<td>long goodId,double price</td>
+				<td>GET</td>
+				<td>goodId为服务的ID，price为修改后的价格</td>
+			</tr>
+			
+			
+			
+		</table>
+	</body>
+</html>

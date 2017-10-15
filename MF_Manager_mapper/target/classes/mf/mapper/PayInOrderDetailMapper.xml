@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mf.mapper.PayInOrderDetailMapper" >
+  <resultMap id="BaseResultMap" type="mf.pojo.PayInOrderDetail" >
+    <id column="pay_in_order_detail_id" property="payInOrderDetailId" jdbcType="BIGINT" />
+    <result column="pay_in_order_id" property="payInOrderId" jdbcType="BIGINT" />
+    <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_price" property="productPrice" jdbcType="DOUBLE" />
+    <result column="product_count" property="productCount" jdbcType="INTEGER" />
+    <result column="product_subtotal" property="productSubtotal" jdbcType="DOUBLE" />
+    <result column="TYPE" property="type" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pay_in_order_detail_id, pay_in_order_id, product_id, product_name, product_price, 
+    product_count, product_subtotal, TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="mf.pojo.PayInOrderDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pay_in_order_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pay_in_order_detail
+    where pay_in_order_detail_id = #{payInOrderDetailId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pay_in_order_detail
+    where pay_in_order_detail_id = #{payInOrderDetailId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="mf.pojo.PayInOrderDetailExample" >
+    delete from pay_in_order_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="mf.pojo.PayInOrderDetail" >
+    insert into pay_in_order_detail (pay_in_order_detail_id, pay_in_order_id, product_id, 
+      product_name, product_price, product_count, 
+      product_subtotal, TYPE)
+    values (#{payInOrderDetailId,jdbcType=BIGINT}, #{payInOrderId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, 
+      #{productName,jdbcType=VARCHAR}, #{productPrice,jdbcType=DOUBLE}, #{productCount,jdbcType=INTEGER}, 
+      #{productSubtotal,jdbcType=DOUBLE}, #{type,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="mf.pojo.PayInOrderDetail" >
+    insert into pay_in_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payInOrderDetailId != null" >
+        pay_in_order_detail_id,
+      </if>
+      <if test="payInOrderId != null" >
+        pay_in_order_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productPrice != null" >
+        product_price,
+      </if>
+      <if test="productCount != null" >
+        product_count,
+      </if>
+      <if test="productSubtotal != null" >
+        product_subtotal,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payInOrderDetailId != null" >
+        #{payInOrderDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="payInOrderId != null" >
+        #{payInOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null" >
+        #{productPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="productCount != null" >
+        #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="productSubtotal != null" >
+        #{productSubtotal,jdbcType=DOUBLE},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="mf.pojo.PayInOrderDetailExample" resultType="java.lang.Integer" >
+    select count(*) from pay_in_order_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pay_in_order_detail
+    <set >
+      <if test="record.payInOrderDetailId != null" >
+        pay_in_order_detail_id = #{record.payInOrderDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="record.payInOrderId != null" >
+        pay_in_order_id = #{record.payInOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=BIGINT},
+      </if>
+      <if test="record.productName != null" >
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPrice != null" >
+        product_price = #{record.productPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.productCount != null" >
+        product_count = #{record.productCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.productSubtotal != null" >
+        product_subtotal = #{record.productSubtotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pay_in_order_detail
+    set pay_in_order_detail_id = #{record.payInOrderDetailId,jdbcType=BIGINT},
+      pay_in_order_id = #{record.payInOrderId,jdbcType=BIGINT},
+      product_id = #{record.productId,jdbcType=BIGINT},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      product_price = #{record.productPrice,jdbcType=DOUBLE},
+      product_count = #{record.productCount,jdbcType=INTEGER},
+      product_subtotal = #{record.productSubtotal,jdbcType=DOUBLE},
+      TYPE = #{record.type,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="mf.pojo.PayInOrderDetail" >
+    update pay_in_order_detail
+    <set >
+      <if test="payInOrderId != null" >
+        pay_in_order_id = #{payInOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null" >
+        product_price = #{productPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="productCount != null" >
+        product_count = #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="productSubtotal != null" >
+        product_subtotal = #{productSubtotal,jdbcType=DOUBLE},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=TINYINT},
+      </if>
+    </set>
+    where pay_in_order_detail_id = #{payInOrderDetailId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="mf.pojo.PayInOrderDetail" >
+    update pay_in_order_detail
+    set pay_in_order_id = #{payInOrderId,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_price = #{productPrice,jdbcType=DOUBLE},
+      product_count = #{productCount,jdbcType=INTEGER},
+      product_subtotal = #{productSubtotal,jdbcType=DOUBLE},
+      TYPE = #{type,jdbcType=TINYINT}
+    where pay_in_order_detail_id = #{payInOrderDetailId,jdbcType=BIGINT}
+  </update>
+</mapper>

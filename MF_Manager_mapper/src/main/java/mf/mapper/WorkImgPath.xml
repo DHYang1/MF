@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mf.mapper.WorkImgPath" >
+
+   <select id="getWorkImgPath" resultType="java.lang.String" parameterType="java.lang.Long" >
+SELECT
+	dw.cover_image
+FROM
+	designwork dw
+WHERE
+	dw.work_id = (
+		SELECT
+			wc.work_id
+		FROM
+			works_collection wc
+		WHERE
+			wc.works_id = (
+				SELECT
+					wl.works_id
+				FROM
+					works_list wl
+				WHERE
+					wl.designer_id =#{designerId,jdbcType=BIGINT}
+			)
+	) 
+
+  </select>
+</mapper>

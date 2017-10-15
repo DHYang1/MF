@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mf.mapper.SearchMapper" >	
+ <resultMap id="BaseResultMap" type="mf.pojo.Designer" >
+    <id column="designer_id" property="designerId" jdbcType="BIGINT" />
+   <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="head_path" property="headPath" jdbcType="VARCHAR" />
+    <result column="hot_dyed" property="hotDyed" jdbcType="DOUBLE" />
+    <result column="makeups" property="makeups" jdbcType="DOUBLE" />
+    <result column="haircut" property="haircut" jdbcType="DOUBLE" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="specialty" property="specialty" jdbcType="VARCHAR" />
+    <result column="honor" property="honor" jdbcType="VARCHAR" />
+    <result column="autograph" property="autograph" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="job_year" property="jobYear" jdbcType="INTEGER" />
+    <result column="be_good" property="beGood" jdbcType="INTEGER" />
+    <result column="popular_index" property="popularIndex" jdbcType="INTEGER" />
+    <result column="desiger_name" property="desigerName" jdbcType="VARCHAR" />
+  </resultMap>  
+  
+  
+ <resultMap id="BaseResultMap1" type="mf.pojo.Designwork" >
+    <id column="work_id" property="workId" jdbcType="BIGINT" />
+    <result column="designer_id" property="designerId" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="cover_image" property="coverImage" jdbcType="VARCHAR" />
+    <result column="content_picture" property="contentPicture" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="face" property="face" jdbcType="INTEGER" />
+    <result column="popular_index" property="popularIndex" jdbcType="TINYINT" />
+    <result column="age_type" property="ageType" jdbcType="TINYINT" />
+    <result column="lastupdate_time" property="lastupdateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="palace_id" property="palaceId" jdbcType="BIGINT" />
+  </resultMap>
+  
+    <resultMap id="BaseResultMap2" type="mf.pojo.Shop" >
+    <id column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="thumbnails" property="thumbnails" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="x" property="x" jdbcType="DOUBLE" />
+    <result column="y" property="y" jdbcType="DOUBLE" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="INTEGER" />
+    <result column="begin_end" property="beginEnd" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_updated" property="lastUpdated" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+     
+ <resultMap id="BaseResultMap3" type="mf.pojo.Designer" >
+    <id column="designer_id" property="designerId" jdbcType="BIGINT" />
+   <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="head_path" property="headPath" jdbcType="VARCHAR" />
+    <result column="hot_dyed" property="hotDyed" jdbcType="DOUBLE" />
+    <result column="makeups" property="makeups" jdbcType="DOUBLE" />
+    <result column="haircut" property="haircut" jdbcType="DOUBLE" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="specialty" property="specialty" jdbcType="VARCHAR" />
+    <result column="honor" property="honor" jdbcType="VARCHAR" />
+    <result column="autograph" property="autograph" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="job_year" property="jobYear" jdbcType="INTEGER" />
+    <result column="be_good" property="beGood" jdbcType="INTEGER" />
+    <result column="popular_index" property="popularIndex" jdbcType="INTEGER" />
+    <result column="desiger_name" property="desigerName" jdbcType="VARCHAR" />
+  </resultMap> 
+  
+  
+   <resultMap id="BaseResultMap5" type="mf.pojo.Shop" >
+    <id column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="thumbnails" property="thumbnails" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="x" property="x" jdbcType="DOUBLE" />
+    <result column="y" property="y" jdbcType="DOUBLE" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="INTEGER" />
+    <result column="begin_end" property="beginEnd" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_updated" property="lastUpdated" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  
+ <resultMap id="BaseResultMap4" type="mf.pojo.Designwork" >
+    <id column="work_id" property="workId" jdbcType="BIGINT" />
+    <result column="designer_id" property="designerId" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="cover_image" property="coverImage" jdbcType="VARCHAR" />
+    <result column="content_picture" property="contentPicture" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="face" property="face" jdbcType="INTEGER" />
+    <result column="popular_index" property="popularIndex" jdbcType="TINYINT" />
+    <result column="age_type" property="ageType" jdbcType="TINYINT" />
+    <result column="lastupdate_time" property="lastupdateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="palace_id" property="palaceId" jdbcType="BIGINT" />
+  </resultMap>
+	 <sql id="Base_Column_index" >
+    designer_id, user_id, head_path, hot_dyed, makeups, haircut, state, introduction, 
+    specialty, honor, autograph, position, job, job_year, be_good, popular_index, desiger_name
+  </sql>
+  <!-- 查询设计师 -->
+  <select id="getDesigers"   parameterType="java.lang.String" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_index" />
+   from designer d WHERE  d.desiger_name like concat(concat('%',#{condition}),'%')
+    
+  </select>
+  
+  <!-- 查询作品 -->
+  <sql id="Base_Column_List" >
+    work_id, designer_id, title, introduction, cover_image, content_picture, sex, face, 
+    popular_index, age_type, lastupdate_time, status, palace_id
+  </sql>
+
+  <select id="getDesignworks"   parameterType="java.lang.String" resultMap="BaseResultMap1"  >
+    select  
+     <include refid="Base_Column_List" />
+     from designwork dw WHERE  dw.title like concat(concat('%',#{condition}),'%')
+    
+  </select>
+
+
+
+<!-- 查询店铺 -->
+
+ <sql id="Base_Column_shop" >
+  shop_id, thumbnails, name, x, y, address, phone, begin_end, create_time, last_updated, 
+    state
+  </sql>
+  <select id="getShops"   parameterType="java.lang.String" resultMap="BaseResultMap2"  >
+    select 
+     <include refid="Base_Column_shop" />
+     from shop sh WHERE  sh.name like concat(concat('%',#{condition}),'%')
+    
+  </select>
+
+<!-- 热门 -->
+
+	 <sql id="Base_Column_hotdes" >
+    designer_id, user_id, head_path, hot_dyed, makeups, haircut, state, introduction, 
+    specialty, honor, autograph, position, job, job_year, be_good, popular_index, desiger_name
+  </sql>
+  <!-- 查询设计师 -->
+  <select id="hotSearchDesigners"   resultMap="BaseResultMap3"  >
+    select
+    <include refid="Base_Column_hotdes" />
+   from  designer ORDER BY   job_year ASC
+    
+  </select>
+
+
+  <!-- 查询作品 -->
+<sql id="Base_Column_hotWork" >
+    work_id, designer_id, title, introduction, cover_image, content_picture, sex, face, 
+    popular_index
+  </sql>
+
+  <select id="hotSearchDesignerWorks"   resultMap="BaseResultMap4"  >
+    select  
+     <include refid="Base_Column_List" />
+   from  designwork ORDER BY lastupdate_time desc 
+    
+  </select>
+
+
+
+<!-- 查询店铺 -->
+
+  <sql id="Base_Column_hotshop" >
+  shop_id, thumbnails, name, x, y, address, phone, begin_end, create_time, last_updated, 
+    state
+  </sql>
+  <select id="hotSearchShops" resultMap="BaseResultMap5"  >
+    select 
+     <include refid="Base_Column_hotshop" />
+   from shop ORDER BY last_updated DESC
+    
+  </select>
+
+
+</mapper>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mf.mapper.DesignerParticularMapper" >
+  <resultMap id="BaseResultMap" type="mf.pojo.DesignerParticular" >
+    <id column="designer_id" property="designerId" jdbcType="BIGINT" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="specialty" property="specialty" jdbcType="VARCHAR" />
+    <result column="autograph" property="autograph" jdbcType="VARCHAR" />
+    <result column="matchGame" property="matchgame" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    designer_id, introduction, specialty, autograph, matchGame, company_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="mf.pojo.DesignerParticularExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from designer_particular
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from designer_particular
+    where designer_id = #{designerId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from designer_particular
+    where designer_id = #{designerId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="mf.pojo.DesignerParticularExample" >
+    delete from designer_particular
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="mf.pojo.DesignerParticular" >
+    insert into designer_particular (designer_id, introduction, specialty, 
+      autograph, matchGame, company_name
+      )
+    values (#{designerId,jdbcType=BIGINT}, #{introduction,jdbcType=VARCHAR}, #{specialty,jdbcType=VARCHAR}, 
+      #{autograph,jdbcType=VARCHAR}, #{matchgame,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="mf.pojo.DesignerParticular" >
+    insert into designer_particular
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="designerId != null" >
+        designer_id,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="specialty != null" >
+        specialty,
+      </if>
+      <if test="autograph != null" >
+        autograph,
+      </if>
+      <if test="matchgame != null" >
+        matchGame,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="designerId != null" >
+        #{designerId,jdbcType=BIGINT},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null" >
+        #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="autograph != null" >
+        #{autograph,jdbcType=VARCHAR},
+      </if>
+      <if test="matchgame != null" >
+        #{matchgame,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="mf.pojo.DesignerParticularExample" resultType="java.lang.Integer" >
+    select count(*) from designer_particular
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update designer_particular
+    <set >
+      <if test="record.designerId != null" >
+        designer_id = #{record.designerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.introduction != null" >
+        introduction = #{record.introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specialty != null" >
+        specialty = #{record.specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.autograph != null" >
+        autograph = #{record.autograph,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchgame != null" >
+        matchGame = #{record.matchgame,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyName != null" >
+        company_name = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update designer_particular
+    set designer_id = #{record.designerId,jdbcType=BIGINT},
+      introduction = #{record.introduction,jdbcType=VARCHAR},
+      specialty = #{record.specialty,jdbcType=VARCHAR},
+      autograph = #{record.autograph,jdbcType=VARCHAR},
+      matchGame = #{record.matchgame,jdbcType=VARCHAR},
+      company_name = #{record.companyName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="mf.pojo.DesignerParticular" >
+    update designer_particular
+    <set >
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null" >
+        specialty = #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="autograph != null" >
+        autograph = #{autograph,jdbcType=VARCHAR},
+      </if>
+      <if test="matchgame != null" >
+        matchGame = #{matchgame,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where designer_id = #{designerId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="mf.pojo.DesignerParticular" >
+    update designer_particular
+    set introduction = #{introduction,jdbcType=VARCHAR},
+      specialty = #{specialty,jdbcType=VARCHAR},
+      autograph = #{autograph,jdbcType=VARCHAR},
+      matchGame = #{matchgame,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR}
+    where designer_id = #{designerId,jdbcType=BIGINT}
+  </update>
+</mapper>

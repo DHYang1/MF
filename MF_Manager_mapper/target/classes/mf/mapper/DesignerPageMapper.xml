@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mf.mapper.DesignerPageMapper" >
+ <resultMap id="BaseResultMap" type="mf.pojo.Designwork" >
+    <id column="work_id" property="workId" jdbcType="BIGINT" />
+    <result column="designer_id" property="designerId" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="cover_image" property="coverImage" jdbcType="VARCHAR" />
+    <result column="content_picture" property="contentPicture" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="face" property="face" jdbcType="INTEGER" />
+    <result column="popular_index" property="popularIndex" jdbcType="TINYINT" />
+    <result column="age_type" property="ageType" jdbcType="TINYINT" />
+    <result column="lastupdate_time" property="lastupdateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="palace_id" property="palaceId" jdbcType="BIGINT" />
+  </resultMap>
+
+   
+<!--       根据设计师分页查询语句 -->
+       <sql id="Base_Column_List" >
+    work_id, designer_id, title, introduction, cover_image, content_picture, sex, face, 
+    popular_index, age_type, lastupdate_time, status, palace_id
+  </sql>
+      <select id="selectBypageDesigner" resultMap="BaseResultMap">
+		   SELECT  <include refid="Base_Column_List"/> from designwork  where designer_id=#{designerId} limit  #{page},10
+		  </select>
+    
+     
+  
+  
+</mapper>

@@ -1,0 +1,9 @@
+<!-- <?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mf.mapper.HotDesigerWorkDao" >
+  
+     查询热门作品 
+		  <select id="getHotDesigersWork" resultType="mf.pojo.HotDesigerWork" >
+		    select  dw.cover_image,d.desiger_name,d.head_path,d.autograph from designwork dw JOIN designer d on dw.designer_id=d.designer_id and dw.`status`=1
+		  </select>
+</mapper> -->

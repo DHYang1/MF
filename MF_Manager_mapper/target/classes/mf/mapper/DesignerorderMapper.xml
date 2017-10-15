@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mf.mapper.DesignerorderMapper" >
+  <resultMap id="BaseResultMap" type="mf.pojo.Designerorder" >
+    <id column="yuId" property="yuid" jdbcType="BIGINT" />
+    <result column="date_time" property="dateTime" jdbcType="VARCHAR" />
+    <result column="designerId" property="designerid" jdbcType="BIGINT" />
+    <result column="good_aspectId" property="goodAspectid" jdbcType="BIGINT" />
+    <result column="time_quantum" property="timeQuantum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    yuId, date_time, designerId, good_aspectId, time_quantum
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="mf.pojo.DesignerorderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from designerorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from designerorder
+    where yuId = #{yuid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from designerorder
+    where yuId = #{yuid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="mf.pojo.DesignerorderExample" >
+    delete from designerorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="mf.pojo.Designerorder" >
+    insert into designerorder (yuId, date_time, designerId, 
+      good_aspectId, time_quantum)
+    values (#{yuid,jdbcType=BIGINT}, #{dateTime,jdbcType=VARCHAR}, #{designerid,jdbcType=BIGINT}, 
+      #{goodAspectid,jdbcType=BIGINT}, #{timeQuantum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="mf.pojo.Designerorder" >
+    insert into designerorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="yuid != null" >
+        yuId,
+      </if>
+      <if test="dateTime != null" >
+        date_time,
+      </if>
+      <if test="designerid != null" >
+        designerId,
+      </if>
+      <if test="goodAspectid != null" >
+        good_aspectId,
+      </if>
+      <if test="timeQuantum != null" >
+        time_quantum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="yuid != null" >
+        #{yuid,jdbcType=BIGINT},
+      </if>
+      <if test="dateTime != null" >
+        #{dateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="designerid != null" >
+        #{designerid,jdbcType=BIGINT},
+      </if>
+      <if test="goodAspectid != null" >
+        #{goodAspectid,jdbcType=BIGINT},
+      </if>
+      <if test="timeQuantum != null" >
+        #{timeQuantum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="mf.pojo.DesignerorderExample" resultType="java.lang.Integer" >
+    select count(*) from designerorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update designerorder
+    <set >
+      <if test="record.yuid != null" >
+        yuId = #{record.yuid,jdbcType=BIGINT},
+      </if>
+      <if test="record.dateTime != null" >
+        date_time = #{record.dateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.designerid != null" >
+        designerId = #{record.designerid,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodAspectid != null" >
+        good_aspectId = #{record.goodAspectid,jdbcType=BIGINT},
+      </if>
+      <if test="record.timeQuantum != null" >
+        time_quantum = #{record.timeQuantum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update designerorder
+    set yuId = #{record.yuid,jdbcType=BIGINT},
+      date_time = #{record.dateTime,jdbcType=VARCHAR},
+      designerId = #{record.designerid,jdbcType=BIGINT},
+      good_aspectId = #{record.goodAspectid,jdbcType=BIGINT},
+      time_quantum = #{record.timeQuantum,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="mf.pojo.Designerorder" >
+    update designerorder
+    <set >
+      <if test="dateTime != null" >
+        date_time = #{dateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="designerid != null" >
+        designerId = #{designerid,jdbcType=BIGINT},
+      </if>
+      <if test="goodAspectid != null" >
+        good_aspectId = #{goodAspectid,jdbcType=BIGINT},
+      </if>
+      <if test="timeQuantum != null" >
+        time_quantum = #{timeQuantum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where yuId = #{yuid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="mf.pojo.Designerorder" >
+    update designerorder
+    set date_time = #{dateTime,jdbcType=VARCHAR},
+      designerId = #{designerid,jdbcType=BIGINT},
+      good_aspectId = #{goodAspectid,jdbcType=BIGINT},
+      time_quantum = #{timeQuantum,jdbcType=VARCHAR}
+    where yuId = #{yuid,jdbcType=BIGINT}
+  </update>
+</mapper>

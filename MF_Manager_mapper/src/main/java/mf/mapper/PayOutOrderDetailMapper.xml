@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mf.mapper.PayOutOrderDetailMapper" >
+  <resultMap id="BaseResultMap" type="mf.pojo.PayOutOrderDetail" >
+    <id column="pay_out_order_detail_id" property="payOutOrderDetailId" jdbcType="BIGINT" />
+    <result column="pay_out_order_id" property="payOutOrderId" jdbcType="BIGINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pay_out_order_detail_id, pay_out_order_id, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="mf.pojo.PayOutOrderDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pay_out_order_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pay_out_order_detail
+    where pay_out_order_detail_id = #{payOutOrderDetailId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pay_out_order_detail
+    where pay_out_order_detail_id = #{payOutOrderDetailId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="mf.pojo.PayOutOrderDetailExample" >
+    delete from pay_out_order_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="mf.pojo.PayOutOrderDetail" >
+    insert into pay_out_order_detail (pay_out_order_detail_id, pay_out_order_id, 
+      remark)
+    values (#{payOutOrderDetailId,jdbcType=BIGINT}, #{payOutOrderId,jdbcType=BIGINT}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="mf.pojo.PayOutOrderDetail" >
+    insert into pay_out_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payOutOrderDetailId != null" >
+        pay_out_order_detail_id,
+      </if>
+      <if test="payOutOrderId != null" >
+        pay_out_order_id,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payOutOrderDetailId != null" >
+        #{payOutOrderDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="payOutOrderId != null" >
+        #{payOutOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="mf.pojo.PayOutOrderDetailExample" resultType="java.lang.Integer" >
+    select count(*) from pay_out_order_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pay_out_order_detail
+    <set >
+      <if test="record.payOutOrderDetailId != null" >
+        pay_out_order_detail_id = #{record.payOutOrderDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="record.payOutOrderId != null" >
+        pay_out_order_id = #{record.payOutOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pay_out_order_detail
+    set pay_out_order_detail_id = #{record.payOutOrderDetailId,jdbcType=BIGINT},
+      pay_out_order_id = #{record.payOutOrderId,jdbcType=BIGINT},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="mf.pojo.PayOutOrderDetail" >
+    update pay_out_order_detail
+    <set >
+      <if test="payOutOrderId != null" >
+        pay_out_order_id = #{payOutOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pay_out_order_detail_id = #{payOutOrderDetailId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="mf.pojo.PayOutOrderDetail" >
+    update pay_out_order_detail
+    set pay_out_order_id = #{payOutOrderId,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR}
+    where pay_out_order_detail_id = #{payOutOrderDetailId,jdbcType=BIGINT}
+  </update>
+</mapper>

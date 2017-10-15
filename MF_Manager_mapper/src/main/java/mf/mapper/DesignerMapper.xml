@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mf.mapper.DesignerMapper" >
+  <resultMap id="BaseResultMap" type="mf.pojo.Designer" >
+    <id column="designer_id" property="designerId" jdbcType="BIGINT" />
+   <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="head_path" property="headPath" jdbcType="VARCHAR" />
+    <result column="hot_dyed" property="hotDyed" jdbcType="DOUBLE" />
+    <result column="makeups" property="makeups" jdbcType="DOUBLE" />
+    <result column="haircut" property="haircut" jdbcType="DOUBLE" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="specialty" property="specialty" jdbcType="VARCHAR" />
+    <result column="honor" property="honor" jdbcType="VARCHAR" />
+    <result column="autograph" property="autograph" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="job_year" property="jobYear" jdbcType="INTEGER" />
+    <result column="be_good" property="beGood" jdbcType="INTEGER" />
+    <result column="popular_index" property="popularIndex" jdbcType="INTEGER" />
+    <result column="desiger_name" property="desigerName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    designer_id, user_id, head_path, hot_dyed, makeups, haircut, state, introduction, 
+    specialty, honor, autograph, position, job, job_year, be_good, popular_index, desiger_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="mf.pojo.DesignerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from designer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from designer
+    where designer_id = #{designerId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from designer
+    where designer_id = #{designerId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="mf.pojo.DesignerExample" >
+    delete from designer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="mf.pojo.Designer" >
+    insert into designer (designer_id, user_id, head_path, 
+      hot_dyed, makeups, haircut, 
+      state, introduction, specialty, 
+      honor, autograph, position, 
+      job, job_year, be_good, 
+      popular_index, desiger_name)
+    values (#{designerId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{headPath,jdbcType=VARCHAR}, 
+      #{hotDyed,jdbcType=DOUBLE}, #{makeups,jdbcType=DOUBLE}, #{haircut,jdbcType=DOUBLE}, 
+      #{state,jdbcType=INTEGER}, #{introduction,jdbcType=VARCHAR}, #{specialty,jdbcType=VARCHAR}, 
+      #{honor,jdbcType=VARCHAR}, #{autograph,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{job,jdbcType=VARCHAR}, #{jobYear,jdbcType=INTEGER}, #{beGood,jdbcType=INTEGER}, 
+      #{popularIndex,jdbcType=INTEGER}, #{desigerName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="mf.pojo.Designer" >
+    insert into designer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="designerId != null" >
+        designer_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="headPath != null" >
+        head_path,
+      </if>
+      <if test="hotDyed != null" >
+        hot_dyed,
+      </if>
+      <if test="makeups != null" >
+        makeups,
+      </if>
+      <if test="haircut != null" >
+        haircut,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="specialty != null" >
+        specialty,
+      </if>
+      <if test="honor != null" >
+        honor,
+      </if>
+      <if test="autograph != null" >
+        autograph,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="jobYear != null" >
+        job_year,
+      </if>
+      <if test="beGood != null" >
+        be_good,
+      </if>
+      <if test="popularIndex != null" >
+        popular_index,
+      </if>
+      <if test="desigerName != null" >
+        desiger_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="designerId != null" >
+        #{designerId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="headPath != null" >
+        #{headPath,jdbcType=VARCHAR},
+      </if>
+      <if test="hotDyed != null" >
+        #{hotDyed,jdbcType=DOUBLE},
+      </if>
+      <if test="makeups != null" >
+        #{makeups,jdbcType=DOUBLE},
+      </if>
+      <if test="haircut != null" >
+        #{haircut,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null" >
+        #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="honor != null" >
+        #{honor,jdbcType=VARCHAR},
+      </if>
+      <if test="autograph != null" >
+        #{autograph,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="jobYear != null" >
+        #{jobYear,jdbcType=INTEGER},
+      </if>
+      <if test="beGood != null" >
+        #{beGood,jdbcType=INTEGER},
+      </if>
+      <if test="popularIndex != null" >
+        #{popularIndex,jdbcType=INTEGER},
+      </if>
+      <if test="desigerName != null" >
+        #{desigerName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="mf.pojo.DesignerExample" resultType="java.lang.Integer" >
+    select count(*) from designer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update designer
+    <set >
+      <if test="record.designerId != null" >
+        designer_id = #{record.designerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.headPath != null" >
+        head_path = #{record.headPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotDyed != null" >
+        hot_dyed = #{record.hotDyed,jdbcType=DOUBLE},
+      </if>
+      <if test="record.makeups != null" >
+        makeups = #{record.makeups,jdbcType=DOUBLE},
+      </if>
+      <if test="record.haircut != null" >
+        haircut = #{record.haircut,jdbcType=DOUBLE},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.introduction != null" >
+        introduction = #{record.introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specialty != null" >
+        specialty = #{record.specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.honor != null" >
+        honor = #{record.honor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.autograph != null" >
+        autograph = #{record.autograph,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.job != null" >
+        job = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobYear != null" >
+        job_year = #{record.jobYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.beGood != null" >
+        be_good = #{record.beGood,jdbcType=INTEGER},
+      </if>
+      <if test="record.popularIndex != null" >
+        popular_index = #{record.popularIndex,jdbcType=INTEGER},
+      </if>
+      <if test="record.desigerName != null" >
+        desiger_name = #{record.desigerName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update designer
+    set designer_id = #{record.designerId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      head_path = #{record.headPath,jdbcType=VARCHAR},
+      hot_dyed = #{record.hotDyed,jdbcType=DOUBLE},
+      makeups = #{record.makeups,jdbcType=DOUBLE},
+      haircut = #{record.haircut,jdbcType=DOUBLE},
+      state = #{record.state,jdbcType=INTEGER},
+      introduction = #{record.introduction,jdbcType=VARCHAR},
+      specialty = #{record.specialty,jdbcType=VARCHAR},
+      honor = #{record.honor,jdbcType=VARCHAR},
+      autograph = #{record.autograph,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      job = #{record.job,jdbcType=VARCHAR},
+      job_year = #{record.jobYear,jdbcType=INTEGER},
+      be_good = #{record.beGood,jdbcType=INTEGER},
+      popular_index = #{record.popularIndex,jdbcType=INTEGER},
+      desiger_name = #{record.desigerName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="mf.pojo.Designer" >
+    update designer
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="headPath != null" >
+        head_path = #{headPath,jdbcType=VARCHAR},
+      </if>
+      <if test="hotDyed != null" >
+        hot_dyed = #{hotDyed,jdbcType=DOUBLE},
+      </if>
+      <if test="makeups != null" >
+        makeups = #{makeups,jdbcType=DOUBLE},
+      </if>
+      <if test="haircut != null" >
+        haircut = #{haircut,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null" >
+        specialty = #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="honor != null" >
+        honor = #{honor,jdbcType=VARCHAR},
+      </if>
+      <if test="autograph != null" >
+        autograph = #{autograph,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="jobYear != null" >
+        job_year = #{jobYear,jdbcType=INTEGER},
+      </if>
+      <if test="beGood != null" >
+        be_good = #{beGood,jdbcType=INTEGER},
+      </if>
+      <if test="popularIndex != null" >
+        popular_index = #{popularIndex,jdbcType=INTEGER},
+      </if>
+      <if test="desigerName != null" >
+        desiger_name = #{desigerName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where designer_id = #{designerId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="mf.pojo.Designer" >
+    update designer
+    set user_id = #{userId,jdbcType=BIGINT},
+      head_path = #{headPath,jdbcType=VARCHAR},
+      hot_dyed = #{hotDyed,jdbcType=DOUBLE},
+      makeups = #{makeups,jdbcType=DOUBLE},
+      haircut = #{haircut,jdbcType=DOUBLE},
+      state = #{state,jdbcType=INTEGER},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      specialty = #{specialty,jdbcType=VARCHAR},
+      honor = #{honor,jdbcType=VARCHAR},
+      autograph = #{autograph,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      job_year = #{jobYear,jdbcType=INTEGER},
+      be_good = #{beGood,jdbcType=INTEGER},
+      popular_index = #{popularIndex,jdbcType=INTEGER},
+      desiger_name = #{desigerName,jdbcType=VARCHAR}
+    where designer_id = #{designerId,jdbcType=BIGINT}
+  </update>
+  
+      <!-- 查询热门设计师 --> 
+		 <!--<select id="getHotDesigers" resultMap="IndexResultMap" >
+		    select
+		    <include refid="Base_Column_name" />
+		    from designer 
+		    <if test="_parameter != null" >
+		      <include refid="Example_Where_Clause" />
+		    </if>
+		      <if test="orderByClause != null" >
+		      order by ${orderByClause}
+		    </if>
+		  </select>
+		   -->
+		  
+		  
+		  
+	 <sql id="Base_Column_index" >
+    designer_id, user_id, head_path, hot_dyed, makeups, haircut, state, introduction, 
+    specialty, honor, autograph, position, job, job_year, be_good, popular_index, desiger_name
+  </sql>
+  <select id="getHotDesigers" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_index" />
+    from designer order by popular_index Desc
+    
+  </select>
+		    <!-- 查询热门设计师 --> 
+	<!-- 	 <select id="getHotDesigers" resultMap="BaseResultMap" >
+		      SELECT  * from designer d ORDER BY popular_index DESC
+		  </select>
+   <resultMap id="IndexResultMap" type="mf.pojo.Designer" >
+     <id column="designer_id" property="designerId" jdbcType="BIGINT" />
+	 <result column="desiger_name" property="desigerName" jdbcType="VARCHAR" />
+     <result column="head_path" property="headPath" jdbcType="VARCHAR" />
+     </resultMap>  -->
+     
+     
+     
+     
+     <!-- 分页查询语句 -->
+     
+      <select id="getDesignerByPage" resultMap="BaseResultMap"  resultType="java.lang.Integer">
+		   SELECT  <include refid="Base_Column_List" />
+		   
+		    from designer  limit  #{page},10
+		  </select>
+     
+     
+     
+     
+          
+     <!-- 根据时间排-->
+     
+      <select id="getDesignerByTime" resultMap="BaseResultMap" >
+		   SELECT  <include refid="Base_Column_List" />
+		   from designer  ORDER BY job_year ASC
+		  </select>
+     
+     
+               
+     
+  
+     
+     
+     
+</mapper>

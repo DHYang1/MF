@@ -1,0 +1,4 @@
+0:0:0:0:0:0:0:1 - - [14/Oct/2017:16:53:45 +0800] "GET /search?condition=%E6%9D%8Ea&type=2 HTTP/1.1" 200 55 http-bio-8091-exec-1 1298
+0:0:0:0:0:0:0:1 - - [14/Oct/2017:16:54:03 +0800] "GET /search?condition=%E5%A6%B9%E5%A6%B9a&type=2 HTTP/1.1" 200 55 http-bio-8091-exec-4 69
+0:0:0:0:0:0:0:1 - - [14/Oct/2017:17:02:00 +0800] "GET /search?condition=a&type=2 HTTP/1.1" 200 346 http-bio-8091-exec-7 268571
+0:0:0:0:0:0:0:1 - - [14/Oct/2017:17:02:13 +0800] "GET /search?condition=%E5%A6%B9&type=2 HTTP/1.1" 200 55 http-bio-8091-exec-10 92

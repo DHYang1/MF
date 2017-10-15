@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mf.mapper.DesignworkMapper" >
+  <resultMap id="BaseResultMap" type="mf.pojo.Designwork" >
+    <id column="work_id" property="workId" jdbcType="BIGINT" />
+    <result column="designer_id" property="designerId" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="cover_image" property="coverImage" jdbcType="VARCHAR" />
+    <result column="content_picture" property="contentPicture" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="face" property="face" jdbcType="INTEGER" />
+    <result column="popular_index" property="popularIndex" jdbcType="TINYINT" />
+    <result column="age_type" property="ageType" jdbcType="TINYINT" />
+    <result column="lastupdate_time" property="lastupdateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="palace_id" property="palaceId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    work_id, designer_id, title, introduction, cover_image, content_picture, sex, face, 
+    popular_index, age_type, lastupdate_time, status, palace_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="mf.pojo.DesignworkExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from designwork
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from designwork
+    where work_id = #{workId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from designwork
+    where work_id = #{workId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="mf.pojo.DesignworkExample" >
+    delete from designwork
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="mf.pojo.Designwork" >
+    insert into designwork (work_id, designer_id, title, 
+      introduction, cover_image, content_picture, 
+      sex, face, popular_index, 
+      age_type, lastupdate_time, status, 
+      palace_id)
+    values (#{workId,jdbcType=BIGINT}, #{designerId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
+      #{introduction,jdbcType=VARCHAR}, #{coverImage,jdbcType=VARCHAR}, #{contentPicture,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{face,jdbcType=INTEGER}, #{popularIndex,jdbcType=TINYINT}, 
+      #{ageType,jdbcType=TINYINT}, #{lastupdateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
+      #{palaceId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="mf.pojo.Designwork" >
+    insert into designwork
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workId != null" >
+        work_id,
+      </if>
+      <if test="designerId != null" >
+        designer_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="coverImage != null" >
+        cover_image,
+      </if>
+      <if test="contentPicture != null" >
+        content_picture,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="face != null" >
+        face,
+      </if>
+      <if test="popularIndex != null" >
+        popular_index,
+      </if>
+      <if test="ageType != null" >
+        age_type,
+      </if>
+      <if test="lastupdateTime != null" >
+        lastupdate_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="palaceId != null" >
+        palace_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workId != null" >
+        #{workId,jdbcType=BIGINT},
+      </if>
+      <if test="designerId != null" >
+        #{designerId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImage != null" >
+        #{coverImage,jdbcType=VARCHAR},
+      </if>
+      <if test="contentPicture != null" >
+        #{contentPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="face != null" >
+        #{face,jdbcType=INTEGER},
+      </if>
+      <if test="popularIndex != null" >
+        #{popularIndex,jdbcType=TINYINT},
+      </if>
+      <if test="ageType != null" >
+        #{ageType,jdbcType=TINYINT},
+      </if>
+      <if test="lastupdateTime != null" >
+        #{lastupdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="palaceId != null" >
+        #{palaceId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="mf.pojo.DesignworkExample" resultType="java.lang.Integer" >
+    select count(*) from designwork
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update designwork
+    <set >
+      <if test="record.workId != null" >
+        work_id = #{record.workId,jdbcType=BIGINT},
+      </if>
+      <if test="record.designerId != null" >
+        designer_id = #{record.designerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduction != null" >
+        introduction = #{record.introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coverImage != null" >
+        cover_image = #{record.coverImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contentPicture != null" >
+        content_picture = #{record.contentPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.face != null" >
+        face = #{record.face,jdbcType=INTEGER},
+      </if>
+      <if test="record.popularIndex != null" >
+        popular_index = #{record.popularIndex,jdbcType=TINYINT},
+      </if>
+      <if test="record.ageType != null" >
+        age_type = #{record.ageType,jdbcType=TINYINT},
+      </if>
+      <if test="record.lastupdateTime != null" >
+        lastupdate_time = #{record.lastupdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.palaceId != null" >
+        palace_id = #{record.palaceId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update designwork
+    set work_id = #{record.workId,jdbcType=BIGINT},
+      designer_id = #{record.designerId,jdbcType=BIGINT},
+      title = #{record.title,jdbcType=VARCHAR},
+      introduction = #{record.introduction,jdbcType=VARCHAR},
+      cover_image = #{record.coverImage,jdbcType=VARCHAR},
+      content_picture = #{record.contentPicture,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      face = #{record.face,jdbcType=INTEGER},
+      popular_index = #{record.popularIndex,jdbcType=TINYINT},
+      age_type = #{record.ageType,jdbcType=TINYINT},
+      lastupdate_time = #{record.lastupdateTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=TINYINT},
+      palace_id = #{record.palaceId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="mf.pojo.Designwork" >
+    update designwork
+    <set >
+      <if test="designerId != null" >
+        designer_id = #{designerId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImage != null" >
+        cover_image = #{coverImage,jdbcType=VARCHAR},
+      </if>
+      <if test="contentPicture != null" >
+        content_picture = #{contentPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="face != null" >
+        face = #{face,jdbcType=INTEGER},
+      </if>
+      <if test="popularIndex != null" >
+        popular_index = #{popularIndex,jdbcType=TINYINT},
+      </if>
+      <if test="ageType != null" >
+        age_type = #{ageType,jdbcType=TINYINT},
+      </if>
+      <if test="lastupdateTime != null" >
+        lastupdate_time = #{lastupdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="palaceId != null" >
+        palace_id = #{palaceId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where work_id = #{workId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="mf.pojo.Designwork" >
+    update designwork
+    set designer_id = #{designerId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      cover_image = #{coverImage,jdbcType=VARCHAR},
+      content_picture = #{contentPicture,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      face = #{face,jdbcType=INTEGER},
+      popular_index = #{popularIndex,jdbcType=TINYINT},
+      age_type = #{ageType,jdbcType=TINYINT},
+      lastupdate_time = #{lastupdateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      palace_id = #{palaceId,jdbcType=BIGINT}
+    where work_id = #{workId,jdbcType=BIGINT}
+  </update>
+  <!-- 查詢作品 -->
+  
+     
+      <select id="getPalaceByPage" resultMap="BaseResultMap"  resultType="java.lang.Integer">
+		   SELECT *  from designwork  where  `status`=2 and palace_id=1
+		  </select>
+     
+  
+  
+     <!-- 分页查询语句 -->
+     
+      <select id="selectBypage" resultMap="BaseResultMap"  resultType="java.lang.Integer">
+		   SELECT  <include refid="Base_Column_List" />
+		    from designwork  limit  #{page},10
+		  </select>
+     
+     <resultMap id="BaseResultMap1" type="mf.pojo.Designwork" >
+    <id column="work_id" property="workId" jdbcType="BIGINT" />
+    <result column="designer_id" property="designerId" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="cover_image" property="coverImage" jdbcType="VARCHAR" />
+    <result column="content_picture" property="contentPicture" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="face" property="face" jdbcType="INTEGER" />
+    <result column="popular_index" property="popularIndex" jdbcType="TINYINT" />
+    <result column="age_type" property="ageType" jdbcType="TINYINT" />
+    <result column="lastupdate_time" property="lastupdateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="palace_id" property="palaceId" jdbcType="BIGINT" />
+  </resultMap>
+   
+<!--       根据设计师分页查询语句
+     
+      <select id="selectBypageDesigner" resultMap="BaseResultMap1" parameterType="java.lang.Integer,java.lang.Long">
+		   SELECT  *  from designwork  where designer_id=#{designerId} limit  #{page},10
+		  </select>
+     -->
+     
+  
+  
+</mapper>

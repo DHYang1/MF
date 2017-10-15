@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mf.mapper.DesignerCertificationMapper" >
+  <resultMap id="BaseResultMap" type="mf.pojo.DesignerCertification" >
+    <result column="certification_id" property="certificationId" jdbcType="BIGINT" />
+    <result column="desiger_id" property="desigerId" jdbcType="BIGINT" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="job_year" property="jobYear" jdbcType="INTEGER" />
+    <result column="good" property="good" jdbcType="INTEGER" />
+    <result column="design_path" property="designPath" jdbcType="VARCHAR" />
+    <result column="ositive_card" property="ositiveCard" jdbcType="VARCHAR" />
+    <result column="the_card" property="theCard" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    certification_id, desiger_id, position, job, job_year, good, design_path, ositive_card, 
+    the_card, state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="mf.pojo.DesignerCertificationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from designer_certification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="mf.pojo.DesignerCertificationExample" >
+    delete from designer_certification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="mf.pojo.DesignerCertification" >
+    insert into designer_certification (certification_id, desiger_id, position, 
+      job, job_year, good, 
+      design_path, ositive_card, the_card, 
+      state)
+    values (#{certificationId,jdbcType=BIGINT}, #{desigerId,jdbcType=BIGINT}, #{position,jdbcType=VARCHAR}, 
+      #{job,jdbcType=VARCHAR}, #{jobYear,jdbcType=INTEGER}, #{good,jdbcType=INTEGER}, 
+      #{designPath,jdbcType=VARCHAR}, #{ositiveCard,jdbcType=VARCHAR}, #{theCard,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="mf.pojo.DesignerCertification" >
+    insert into designer_certification
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="certificationId != null" >
+        certification_id,
+      </if>
+      <if test="desigerId != null" >
+        desiger_id,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="jobYear != null" >
+        job_year,
+      </if>
+      <if test="good != null" >
+        good,
+      </if>
+      <if test="designPath != null" >
+        design_path,
+      </if>
+      <if test="ositiveCard != null" >
+        ositive_card,
+      </if>
+      <if test="theCard != null" >
+        the_card,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="certificationId != null" >
+        #{certificationId,jdbcType=BIGINT},
+      </if>
+      <if test="desigerId != null" >
+        #{desigerId,jdbcType=BIGINT},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="jobYear != null" >
+        #{jobYear,jdbcType=INTEGER},
+      </if>
+      <if test="good != null" >
+        #{good,jdbcType=INTEGER},
+      </if>
+      <if test="designPath != null" >
+        #{designPath,jdbcType=VARCHAR},
+      </if>
+      <if test="ositiveCard != null" >
+        #{ositiveCard,jdbcType=VARCHAR},
+      </if>
+      <if test="theCard != null" >
+        #{theCard,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="mf.pojo.DesignerCertificationExample" resultType="java.lang.Integer" >
+    select count(*) from designer_certification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update designer_certification
+    <set >
+      <if test="record.certificationId != null" >
+        certification_id = #{record.certificationId,jdbcType=BIGINT},
+      </if>
+      <if test="record.desigerId != null" >
+        desiger_id = #{record.desigerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.job != null" >
+        job = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobYear != null" >
+        job_year = #{record.jobYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.good != null" >
+        good = #{record.good,jdbcType=INTEGER},
+      </if>
+      <if test="record.designPath != null" >
+        design_path = #{record.designPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ositiveCard != null" >
+        ositive_card = #{record.ositiveCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.theCard != null" >
+        the_card = #{record.theCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update designer_certification
+    set certification_id = #{record.certificationId,jdbcType=BIGINT},
+      desiger_id = #{record.desigerId,jdbcType=BIGINT},
+      position = #{record.position,jdbcType=VARCHAR},
+      job = #{record.job,jdbcType=VARCHAR},
+      job_year = #{record.jobYear,jdbcType=INTEGER},
+      good = #{record.good,jdbcType=INTEGER},
+      design_path = #{record.designPath,jdbcType=VARCHAR},
+      ositive_card = #{record.ositiveCard,jdbcType=VARCHAR},
+      the_card = #{record.theCard,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

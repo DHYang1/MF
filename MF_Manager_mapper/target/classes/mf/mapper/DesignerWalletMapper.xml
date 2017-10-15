@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mf.mapper.DesignerWalletMapper" >
+  <resultMap id="BaseResultMap" type="mf.pojo.DesignerWallet" >
+    <id column="designer_id" property="designerId" jdbcType="BIGINT" />
+    <result column="income_count" property="incomeCount" jdbcType="DOUBLE" />
+    <result column="expenditure_count" property="expenditureCount" jdbcType="DOUBLE" />
+    <result column="balance" property="balance" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    designer_id, income_count, expenditure_count, balance
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="mf.pojo.DesignerWalletExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from designer_wallet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from designer_wallet
+    where designer_id = #{designerId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from designer_wallet
+    where designer_id = #{designerId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="mf.pojo.DesignerWalletExample" >
+    delete from designer_wallet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="mf.pojo.DesignerWallet" >
+    insert into designer_wallet (designer_id, income_count, expenditure_count, 
+      balance)
+    values (#{designerId,jdbcType=BIGINT}, #{incomeCount,jdbcType=DOUBLE}, #{expenditureCount,jdbcType=DOUBLE}, 
+      #{balance,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="mf.pojo.DesignerWallet" >
+    insert into designer_wallet
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="designerId != null" >
+        designer_id,
+      </if>
+      <if test="incomeCount != null" >
+        income_count,
+      </if>
+      <if test="expenditureCount != null" >
+        expenditure_count,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="designerId != null" >
+        #{designerId,jdbcType=BIGINT},
+      </if>
+      <if test="incomeCount != null" >
+        #{incomeCount,jdbcType=DOUBLE},
+      </if>
+      <if test="expenditureCount != null" >
+        #{expenditureCount,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="mf.pojo.DesignerWalletExample" resultType="java.lang.Integer" >
+    select count(*) from designer_wallet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update designer_wallet
+    <set >
+      <if test="record.designerId != null" >
+        designer_id = #{record.designerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.incomeCount != null" >
+        income_count = #{record.incomeCount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.expenditureCount != null" >
+        expenditure_count = #{record.expenditureCount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.balance != null" >
+        balance = #{record.balance,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update designer_wallet
+    set designer_id = #{record.designerId,jdbcType=BIGINT},
+      income_count = #{record.incomeCount,jdbcType=DOUBLE},
+      expenditure_count = #{record.expenditureCount,jdbcType=DOUBLE},
+      balance = #{record.balance,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="mf.pojo.DesignerWallet" >
+    update designer_wallet
+    <set >
+      <if test="incomeCount != null" >
+        income_count = #{incomeCount,jdbcType=DOUBLE},
+      </if>
+      <if test="expenditureCount != null" >
+        expenditure_count = #{expenditureCount,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where designer_id = #{designerId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="mf.pojo.DesignerWallet" >
+    update designer_wallet
+    set income_count = #{incomeCount,jdbcType=DOUBLE},
+      expenditure_count = #{expenditureCount,jdbcType=DOUBLE},
+      balance = #{balance,jdbcType=DOUBLE}
+    where designer_id = #{designerId,jdbcType=BIGINT}
+  </update>
+</mapper>
